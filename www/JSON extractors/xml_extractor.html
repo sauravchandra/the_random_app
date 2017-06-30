@@ -37,11 +37,28 @@ function convert(){
 	var text=request.responseText;
 	text=text.split('\n');
 	for(var i=0;i<text.length;i++){
-		obj[i+4]=text[i].replace(/[\r\n]/g,"");
+		obj[i+359]=text[i].replace(/[\r\n]/g,"");
 	}
 	$("#main").text(JSON.stringify(obj));
 }
 	
+/*Function to extract all links from a webpage
+
+var linklist=[];
+var list_obj={};
+function get_links(){
+	for(var i=0;i<document.links.length;i++){
+		if(document.links[i].hostname=="www.quora.com"){
+			linklist.push(document.links[i].href);
+		}
+	}
+	console.log(linklist);
+	for(var j=0;j<linklist.length;j++){
+		list_obj[j+24]=linklist[j];
+	}
+	console.log(JSON.stringify(list_obj));
+}
+*/
 
 </script>
 </html>
