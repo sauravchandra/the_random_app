@@ -1,0 +1,25 @@
+<!DOCTYPE html>
+<html>
+<head><title>YouTube extractor</title></head>
+<body>
+<button onClick="extract()">CLICK TO EXTRACT & CONVERT</button>
+<div id="main">
+</div>
+</body>
+<script type="text/javascript" src="../js/jquery-3.2.1.min.js"></script>
+<script type="text/javascript">
+
+var obj={};
+
+var result={};
+function extract(){
+	console.log(obj);
+	for(var i=0;i<45;i++){
+		result[i+505]="https://www.youtube.com/watch?v="+obj.items[i].contentDetails.videoId;
+	}
+	
+	$("#main").text(JSON.stringify(result));
+	
+}
+</script>
+</html>
