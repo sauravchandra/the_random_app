@@ -20,17 +20,42 @@
     <!-- <meta http-equiv="Content-Security-Policy" content="default-src 'self' data: gap: 'unsafe-inline' https://ssl.gstatic.com; style-src 'self' 'unsafe-inline'; media-src *" /> -->
 
     <link rel="stylesheet" type="text/css" href="css/index.css" />
+    <link rel="stylesheet" type="text/css" href="css/bootstrap.min.css" />
     <title>Project Xapp</title>
 </head>
 
 <body>
-    <div class="app">
+    <div class="app container-fluid" id="main">
       <button onClick="retr()">Retrieve</button><br><br>
       <span id="lolz"></span><br><br>
       <span id="lolz2"></span>
+      <div class="message">
+      	<span class="main_message">Stuck on a shopping trip with your family?</span><br><br>Click on the
+      </div>
+      <div class="the_button_wrapper">
+      	<a class="the_button btn btn-primary">The Random Button</a>
+      </div>
     </div>
+    <div id="menu_button" class="persist_btn" style="left:2%; bottom:90%; transform:none;">
+    	<span class="glyphicon glyphicon-menu-hamburger"></span>
+    </div>
+    <div id="menu" class="side_menu">
+    	<div class="menu_option" onclick="saved_content()">Saved content</div><br>
+        <div class="menu_option" onclick="contribute()">Contribute</div><br>
+        <div class="menu_option" onclick="about_app()">About app</div>
+    </div>
+    <div id="about_app" class="aboutapp">
+    	<div class="about_message">
+    		Project Xapp<br><br>
+            Version 0.0.9<br><br>
+            Developed by Aswin G<br><br>
+            ©A G Z Studios
+	    </div>
+    </div>
+    
     <script type="text/javascript" src="cordova.js"></script>
     <script type="text/javascript" src="js/jquery-3.2.1.min.js"></script>
+    <script type="text/javascript" src="js/bootstrap.min.js"></script>
     <script type="text/javascript" src="js/index.js"></script>
     <script type="text/javascript">
         app.initialize();

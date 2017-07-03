@@ -29,10 +29,96 @@ body {
 
 /* Portrait layout (default) */
 
+/*main viewport*/
 .app {
 	position:absolute;
 	height:100vh;
 	width:100vw;
+	background-color:#FF9;
+}
+
+/*hamburger icon resize*/
+
+.glyphicon-menu-hamburger {
+  font-size: 7.5vw;
+}
+
+/*fixed buttons*/
+.persist_btn {
+	position:fixed;
+	z-index::11;
+	bottom:5%;
+	left:50%;
+	text-align:center;
+	transform: translate(-50%,0);
+	padding:7px;
+}
+
+/*top 45% of the screen holds the message displayed alongside the button*/
+.message{
+	position:absolute;
+	top:0%;
+	left:0%;
+	height:45vh;
+	width:100vw;
+	padding:5vw 3vw 0vw 3vw;
+	text-align:center;
+	font-size:7.5vw;
+}
+
+.main_message{
+	font-size:10.5vw;
+}
+
+/*the next 30% holds the button itself*/
+.the_button_wrapper{
+	background-color:black;
+	position:absolute;
+	left:0%;
+	top:45vh;
+	height:40vh;
+	width:100vw;
+	padding:5vw 5vw 5vw 5vw;
+}
+
+.the_button{
+	border-radius:50%;
+}
+
+/*side menu*/
+.side_menu{
+	position:fixed;
+	z-index:20;
+	background-color:#CCC;
+	height:100vh;
+	width:70vw;
+	left:-75vw;
+	text-align:center;
+	font-weight:bold;
+	padding-top:20px;
+	padding-bottom:20px;
+	box-shadow:4px 4px 15px;
+}
+
+.aboutapp{
+	position:fixed;
+	z-index:30;
+	color:#CCC;
+	font-weight:bold;
+	background-color:rgba(0,0,0,0.7);
+	top:0;
+	left:0;
+	width:100vw;
+	height:100vh;
+	text-align:center;
+	display:none;
+}
+
+.about_message{
+	position:fixed;
+	top:50%;
+	left:50%;
+    transform: translate(-50%,-50%);
 }
 
 /* Landscape layout (with min-width) */
