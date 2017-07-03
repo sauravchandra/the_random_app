@@ -29,31 +29,85 @@ var app = {
 var rand;
 var browser;
 var div_on_focus=0;
+var isloading=0;
+var msgs=['Loading...','Counting the number of stars in the universe...','Waiting for winter to arrive...','Bringing Jon Snow back to life...','Casting a patronus...','Cooking some crystal meth','Erasing the rules of fight club...']
 
 //JSON file endpoints
-var cat_end=7;
-var music_end=45;
-var past_end=25;
+var cat_end=8;
+var entertainment_end=412;
+var games_end=16;
+var handpicked_end=13;
+var humour_end=221;
+var music_end=549;
+var self_improv_end=383;
+var new_world_end=407;
+var past_end=223;
 
 //Retrieve content
 function retr(){
 	rand=random_gen(1,cat_end);
-	rand=6;
+	rand=1
+	
+	//Entertainment
+	if(rand==1){
+		jQuery.getJSON("content/entertainment.json",function(data){
+				rand=random_gen(1,entertainment_end);
+				browser=window.open(data[rand],'_blank','location=yes');
+		});
+	}
+	
+	//Games
+	else if(rand==2){
+		jQuery.getJSON("content/games.json",function(data){
+				rand=random_gen(1,games_end);
+				browser=window.open(data[rand],'_blank','location=yes');
+		});
+	}
+	
+	//handpicked
+	else if(rand==3){
+		jQuery.getJSON("content/handpicked.json",function(data){
+				rand=random_gen(1,handpicked_end);
+				browser=window.open(data[rand],'_blank','location=yes');
+		});
+	}
+	
+	//Humour
+	else if(rand==4){
+		jQuery.getJSON("content/humour.json",function(data){
+				rand=random_gen(1,humour_end);
+				browser=window.open(data[rand],'_blank','location=yes');
+		});
+	}
 	
 	//Music
-	if(rand==6){
+	else if(rand==5){
 		jQuery.getJSON("content/music.json",function(data){
 				rand=random_gen(1,music_end);
-				$("#lolz").text(data[rand]);
+				browser=window.open(data[rand],'_blank','location=yes');
+		});
+	}
+	
+	//Self improvement
+	else if(rand==6){
+		jQuery.getJSON("content/self_improv.json",function(data){
+				rand=random_gen(1,self_improv_end);
+				browser=window.open(data[rand],'_blank','location=yes');
+		});
+	}
+	
+	//New world
+	else if(rand==7){
+		jQuery.getJSON("content/the_new_world.json",function(data){
+				rand=random_gen(1,new_world_end);
 				browser=window.open(data[rand],'_blank','location=yes');
 		});
 	}
 	
 	//Past
-	else if(rand==1){
-		jQuery.getJSON("content/the_past.json",function(data){
+	else if(rand==8){
+		jQuery.getJSON("content/past.json",function(data){
 				rand=random_gen(1,past_end);
-				$("#lolz").text(data[rand]);
 				browser=window.open(data[rand],'_blank','location=yes');
 		});
 	}
@@ -63,6 +117,24 @@ function retr(){
 function random_gen(min_limit,max_limit){
 	return Math.floor(Math.random()*(max_limit-min_limit+1)+min_limit);
 }
+
+//Change button image to pressed button
+function press_button(){
+	$('.the_button').attr('src','img/button_pressed.png');
+}
+
+function leave_button(){
+	$('.the_button').attr('src','img/button_unpressed.png');
+	if(isloading==0){
+		isloading=1;
+		rand=random_gen(1,msgs.length);
+		$('.loader_text').text(msgs[rand]);
+		$('.loading').show();
+		retr();
+	}
+}
+
+
 
 //Show menu
 $('#menu_button').click(function(){

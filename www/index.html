@@ -26,14 +26,15 @@
 
 <body>
     <div class="app container-fluid" id="main">
-      <button onClick="retr()">Retrieve</button><br><br>
-      <span id="lolz"></span><br><br>
-      <span id="lolz2"></span>
       <div class="message">
-      	<span class="main_message">Stuck on a shopping trip with your family?</span><br><br>Click on the
+      	<span class="main_message">Stuck on a shopping trip with your family?</span><br>Press the button.
       </div>
       <div class="the_button_wrapper">
-      	<a class="the_button btn btn-primary">The Random Button</a>
+      	<img src="img/button_unpressed.png" class="the_button" onTouchStart="press_button()" onTouchEnd="leave_button()">
+        <div class="loading progress">
+      		<div class="progress-bar progress-bar-striped active" role="progressbar" style="width:100%;"></div>
+      	</div>
+        <div class="loading loader_text"></div> 
       </div>
     </div>
     <div id="menu_button" class="persist_btn" style="left:2%; bottom:90%; transform:none;">
