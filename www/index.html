@@ -21,41 +21,52 @@
 
     <link rel="stylesheet" type="text/css" href="css/index.css" />
     <link rel="stylesheet" type="text/css" href="css/bootstrap.min.css" />
+    <link rel="stylesheet" type="text/css" href="css/w3.css" />
     <title>Project Xapp</title>
 </head>
 
 <body>
+	<div id="splash"></div>
     <div class="app container-fluid" id="main">
       <div class="message">
-      	<span class="main_message">Stuck on a shopping trip with your family?</span><br>Press the button.
+      	<span class="main_message"></span><br>Press the button.
       </div>
       <div class="the_button_wrapper">
-      	<img src="img/button_unpressed.png" class="the_button" onTouchStart="press_button()" onTouchEnd="leave_button()">
+      	<img src="img/button_unpressed.png" class="the_button" onTouchStart="press_button()" onTouchEnd="leave_button()" onMouseDown="press_button()" onMouseUp="leave_button()">
         <div class="loading progress">
       		<div class="progress-bar progress-bar-striped active" role="progressbar" style="width:100%;"></div>
       	</div>
         <div class="loading loader_text"></div> 
       </div>
     </div>
-    <div id="menu_button" class="persist_btn" style="left:2%; bottom:90%; transform:none;">
+    <div id="menu_button" class="persist_btn" style="left:0%; bottom:90%; transform:none;">
     	<span class="glyphicon glyphicon-menu-hamburger"></span>
     </div>
     <div id="menu" class="side_menu">
-    	<div class="menu_option" onclick="saved_content()">Saved content</div><br>
-        <div class="menu_option" onclick="contribute()">Contribute</div><br>
-        <div class="menu_option" onclick="about_app()">About app</div>
+    	<div class="w3-ripple" onclick="saved_content()">Saved links</div><br>
+        <div class="w3-ripple" onclick="contribute()">Contribute</div><br>
+        <div class="w3-ripple" onclick="about_app()">About app</div>
     </div>
     <div id="about_app" class="aboutapp">
     	<div class="about_message">
-    		Project Xapp<br><br>
-            Version 0.0.9<br><br>
+    		The Random App<br><br>
+            Version 0.5.0<br><br>
             Developed by Aswin G<br><br>
             ©A G Z Studios
+	    </div>
+    </div>
+    <div id="contribute" class="aboutapp" style="background-color:rgba(0,0,0,0.9);">
+    	<div class="about_message" style="font-weight:normal;">
+    		You can help this app grow by contributing!<br><br>
+            If the app takes you to any NSFW content or a broken/unavailable link, report it to agzstudios@gmail.com<br><br>
+            Suggestions for websites that host interesting content that can be added to this app's catalouge are also welcome!<br><br>
+            If you're comfortable with git, you can make your own changes and commit them at <a onclick="window.open('https://github.com/agzuniverse/the_random_app','_blank','location=yes')">https://github.com/agzuniverse/the_random_app</a><br>
 	    </div>
     </div>
     
     <script type="text/javascript" src="cordova.js"></script>
     <script type="text/javascript" src="js/jquery-3.2.1.min.js"></script>
+    <script type="text/javascript" src="js/hammer.min.js"></script>
     <script type="text/javascript" src="js/bootstrap.min.js"></script>
     <script type="text/javascript" src="js/index.js"></script>
     <script type="text/javascript">
