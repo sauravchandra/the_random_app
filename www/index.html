@@ -45,7 +45,73 @@
     <div id="menu" class="side_menu">
     	<div class="w3-ripple" onclick="saved_content()">Saved links</div><br>
         <div class="w3-ripple" onclick="contribute()">Contribute</div><br>
-        <div class="w3-ripple" onclick="about_app()">About app</div>
+        <div class="w3-ripple" onclick="about_app()">About app</div><br>
+        <div class="togglelist">
+        	<p style="float:left">
+        		Entertainment
+            </p>
+            <label class="switch">
+				<input id="entertainment" type="checkbox" checked>
+				<div class="slider round"></div>
+			</label>
+            <br>
+            <p style="float:left">
+        		Games
+            </p>
+            <label class="switch">
+				<input id="games" type="checkbox" checked>
+				<div class="slider round"></div>
+			</label>
+            <br>
+            <p style="float:left">
+        		Humour
+            </p>
+            <label class="switch">
+				<input id="humour" type="checkbox" checked>
+				<div class="slider round"></div>
+			</label>
+            <br>
+            <p style="float:left">
+	    		Music
+            </p>
+            <label class="switch">
+				<input id="music" type="checkbox" checked>
+				<div class="slider round"></div>
+			</label>
+            <br>
+            <p style="float:left">
+        		Self Improvement
+            </p>
+            <label class="switch">
+				<input id="self_improv" type="checkbox" checked>
+				<div class="slider round"></div>
+			</label>
+            <br>
+            <p style="float:left">
+        		The world
+            </p>
+            <label class="switch">
+				<input id="the_new_world" type="checkbox" checked>
+				<div class="slider round"></div>
+			</label>
+            <br>
+            <p style="float:left">
+        		The past
+            </p>
+            <label class="switch">
+				<input id="the_past" type="checkbox" checked>
+				<div class="slider round"></div>
+			</label>
+            <br>
+            <p style="float:left">
+        		Handpicked
+            </p>
+            <label class="switch">
+				<input id="handpicked" type="checkbox">
+				<div class="slider round"></div>
+			</label>
+            <br>
+        </div>
     </div>
     <div id="about_app" class="aboutapp">
     	<div class="about_message">
@@ -59,10 +125,11 @@
     	<div class="about_message" style="font-weight:normal;">
     		You can help this app grow by contributing!<br><br>
             If the app takes you to any NSFW content or a broken/unavailable link, report it to agzstudios@gmail.com<br><br>
-            Suggestions for websites that host interesting content that can be added to this app's catalouge are also welcome!<br><br>
+            Suggestions for websites that host interesting content that can be added to this app's catalogue are also welcome!<br><br>
             If you're comfortable with git, you can make your own changes and commit them at <a onclick="window.open('https://github.com/agzuniverse/the_random_app','_blank','location=yes')">https://github.com/agzuniverse/the_random_app</a><br>
 	    </div>
     </div>
+    <div id="toastbar" class="toast w3-round-xlarge w3-border w3-border-white" ></div>
     
     <script type="text/javascript" src="cordova.js"></script>
     <script type="text/javascript" src="js/jquery-3.2.1.min.js"></script>

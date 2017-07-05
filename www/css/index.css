@@ -183,3 +183,82 @@ body {
     animation:fade 3000ms infinite;
     -webkit-animation:fade 3000ms infinite;
 }
+
+.togglelist{
+	padding:0vh 2vw 0vh 2vw;
+	text-align:right;
+	font-weight:normal;
+}
+
+.toast{
+	background-color:#000;
+	color:#FFF;
+	position:fixed;
+	z-index:50;
+	padding:5px;
+	display:none;
+	bottom:5%;
+	text-align:center;
+	left:50%;
+	transform: translate(-50%, 0);
+	
+}
+
+/*wrap around slider*/
+.switch{
+  position:relative;
+  display:inline-block;
+  top:0vh;
+  width:15vw;
+  height:5vh;
+}
+
+/* Hide default HTML checkbox */
+.switch input {
+	display:none;
+}
+
+/* The slider */
+.slider{
+  cursor: pointer;
+  height:5vh;
+  width:15vw;
+  background-color: #ccc;
+  -webkit-transition: .4s;
+  transition: .4s;
+}
+
+.slider:before {
+  position: absolute;
+  content: "";
+  height: 4vh;
+  width: 6.8vw;
+  left: 1vw;
+  bottom: 0.5vh;
+  background-color: white;
+  -webkit-transition: .4s;
+  transition: .4s;
+}
+
+input:checked + .slider {
+  background-color: #2196F3;
+}
+
+input:focus + .slider {
+  box-shadow: 0 0 1px #2196F3;
+}
+
+input:checked + .slider:before {
+  -webkit-transform: translateX(6.8vw);
+  -ms-transform: translateX(6.8vw);
+  transform: translateX(6.8vw);
+}
+
+/* Rounded sliders */
+.slider.round {
+  border-radius: 5vw;
+}
+
+.slider.round:before {
+  border-radius: 50%;
+}

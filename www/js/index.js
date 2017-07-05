@@ -18,7 +18,7 @@ var app = {
     onDeviceReady: function() {
         app.receivedEvent('deviceready');
 		document.addEventListener("backbutton",back_handler,false);
-		rand=random_gen(0,titles.length);
+		rand=random_gen(0,titles.length-1);
 		$('.main_message').html(titles[rand]);
 		setTimeout(function(){$('#splash').hide();},1000);
     },
@@ -33,6 +33,7 @@ var rand;
 var browser;
 var div_on_focus=0;
 var isloading=0;
+var dis=new Array(8);
 var msgs=['Loading...','Counting the number of stars in the universe...','Waiting for winter to arrive...','Bringing Jon Snow back to life...','Casting a patronus...','Cooking some crystal meth...','Erasing the rules of fight club...','Flinging you across the internet...','Activating warp drive...']
 var titles=['Bored?<br>No more.','Stuck on a shopping trip with your family?','One of those days that goes on for too long?','Trying to look busy?','Have nothing to do?','A rainy day and forgot to save up something?','Want to explore the internet?','Have some time to waste?']
 var swiper=new Hammer(document.getElementById('main'));
@@ -42,79 +43,125 @@ var cat_end=8;
 
 //Retrieve content
 function retr(){
-	rand=random_gen(1,cat_end);
-	rand=5;
-	
-	//Entertainment
-	if(rand==1){
-		jQuery.getJSON("content/entertainment.json",function(data){
-				rand=random_gen(1,Object.keys(data).length);
-				browser=window.open(data[rand],'_blank','location=yes');
-				browser.addEventListener('exit',reset_button);
-		});
+	//Check which categories are disabled
+	dis.fill(0);
+	if(!($("#entertainment").is(':checked'))){
+		dis[0]=1;
+	}
+	if(!($("#games").is(':checked'))){
+		dis[1]=1;
+	}
+	if(!($("#humour").is(':checked'))){
+		dis[2]=1;
+	}
+	if(!($("#music").is(':checked'))){
+		dis[3]=1;
+	}
+	if(!($("#self_improv").is(':checked'))){
+		dis[4]=1;
+	}
+	if(!($("#the_new_world").is(':checked'))){
+		dis[5]=1;
+	}
+	if(!($("#the_past").is(':checked'))){
+		dis[6]=1;
+	}
+	if(!($("#handpicked").is(':checked'))){
+		dis[7]=1;
 	}
 	
-	//Games
-	else if(rand==2){
-		jQuery.getJSON("content/games.json",function(data){
-				rand=random_gen(1,Object.keys(data).length);
-				browser=window.open(data[rand],'_blank','location=yes');
-				browser.addEventListener('exit',reset_button);
-		});
-	}
+	//Check if everything is not deselected
+	if(!(dis.every(function(d){return d==1}))){
+		
+		//Show loader and caption
+		rand=random_gen(0,msgs.length-1);
+		$('.loader_text').text(msgs[rand]);
+		$('.loading').show();
+		
+		do{
+			rand=random_gen(1,cat_end);
+		}while(dis[rand-1]==1)
 	
-	//handpicked
-	else if(rand==3){
-		jQuery.getJSON("content/handpicked.json",function(data){
-				rand=random_gen(1,Object.keys(data).length);
-				browser=window.open(data[rand],'_blank','location=yes');
-				browser.addEventListener('exit',reset_button);
-		});
-	}
+		//Entertainment
+		if(rand==1){
+			jQuery.getJSON("content/entertainment.json",function(data){
+					rand=random_gen(1,Object.keys(data).length);
+					browser=window.open(data[rand],'_blank','location=yes');
+					browser.addEventListener('exit',reset_button);
+			});
+		}
 	
-	//Humour
-	else if(rand==4){
-		jQuery.getJSON("content/humour.json",function(data){
-				rand=random_gen(1,Object.keys(data).length);
-				browser=window.open(data[rand],'_blank','location=yes');
-				browser.addEventListener('exit',reset_button);
-		});
-	}
+		//Games
+		else if(rand==2){
+			jQuery.getJSON("content/games.json",function(data){
+					rand=random_gen(1,Object.keys(data).length);
+					browser=window.open(data[rand],'_blank','location=yes');
+					browser.addEventListener('exit',reset_button);
+			});
+		}
 	
-	//Music
-	else if(rand==5){
-		jQuery.getJSON("content/music.json",function(data){
-				rand=random_gen(1,Object.keys(data).length);
-				browser=window.open(data[rand],'_blank','location=yes');
-				browser.addEventListener('exit',reset_button);
-		});
-	}
+		//handpicked
+		else if(rand==8){
+			jQuery.getJSON("content/handpicked.json",function(data){
+					rand=random_gen(1,Object.keys(data).length);
+					browser=window.open(data[rand],'_blank','location=yes');
+					browser.addEventListener('exit',reset_button);
+			});
+		}
 	
-	//Self improvement
-	else if(rand==6){
-		jQuery.getJSON("content/self_improv.json",function(data){
-				rand=random_gen(1,Object.keys(data).length);
-				browser=window.open(data[rand],'_blank','location=yes');
-				browser.addEventListener('exit',reset_button);
-		});
-	}
+		//Humour
+		else if(rand==3){
+			jQuery.getJSON("content/humour.json",function(data){
+					rand=random_gen(1,Object.keys(data).length);
+					browser=window.open(data[rand],'_blank','location=yes');
+					browser.addEventListener('exit',reset_button);
+			});
+		}
 	
-	//New world
-	else if(rand==7){
-		jQuery.getJSON("content/the_new_world.json",function(data){
-				rand=random_gen(1,Object.keys(data).length);
-				browser=window.open(data[rand],'_blank','location=yes');
-				browser.addEventListener('exit',reset_button);
-		});
-	}
+		//Music
+		else if(rand==4){
+			jQuery.getJSON("content/music.json",function(data){
+					rand=random_gen(1,Object.keys(data).length);
+					browser=window.open(data[rand],'_blank','location=yes');
+					browser.addEventListener('exit',reset_button);
+			});
+		}
 	
-	//Past
-	else if(rand==8){
-		jQuery.getJSON("content/past.json",function(data){
-				rand=random_gen(1,Object.keys(data).length);
-				browser=window.open(data[rand],'_blank','location=yes');
-				browser.addEventListener('exit',reset_button);
-		});
+		//Self improvement
+		else if(rand==5){
+			jQuery.getJSON("content/self_improv.json",function(data){
+					rand=random_gen(1,Object.keys(data).length);
+					browser=window.open(data[rand],'_blank','location=yes');
+					browser.addEventListener('exit',reset_button);
+			});
+		}
+	
+		//New world
+		else if(rand==6){
+			jQuery.getJSON("content/the_new_world.json",function(data){
+					rand=random_gen(1,Object.keys(data).length);
+					browser=window.open(data[rand],'_blank','location=yes');
+					browser.addEventListener('exit',reset_button);
+			});
+		}
+	
+		//Past
+		else if(rand==7){
+			jQuery.getJSON("content/the_past.json",function(data){
+					rand=random_gen(1,Object.keys(data).length);
+					browser=window.open(data[rand],'_blank','location=yes');
+					browser.addEventListener('exit',reset_button);
+			});
+		}
+	}
+	//If everything is deselected
+	else{
+		//Warning toast
+		alert("ONCE");
+		$('#toastbar').text("You have disabled all categories!");
+		$('#toastbar').fadeIn(500);
+		$('#toastbar').fadeOut(1000);
+		isloading=0;
 	}
 }
 
@@ -132,10 +179,8 @@ function leave_button(){
 	$('.the_button').attr('src','img/button_unpressed.png');
 	if(isloading==0 && !($("#menu").hasClass('visible'))){
 		isloading=1;
-		rand=random_gen(0,msgs.length);
-		$('.loader_text').text(msgs[rand]);
-		$('.loading').show();
 		retr();
+		alert("YOWZAH");
 	}
 }
 
