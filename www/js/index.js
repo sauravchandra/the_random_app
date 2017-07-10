@@ -21,6 +21,22 @@ var app = {
 		rand=random_gen(0,titles.length-1);
 		$('.main_message').html(titles[rand]);
 		setTimeout(function(){$('#splash').hide();},1000);
+		
+		//Load saved links
+		var s_link;
+		var r_key=0;
+		var len=localStorage.length;
+		if(len==0){
+			$('#no_links').html('No links saved');
+		}
+		else{
+			for(var i=0;i<len;i++){
+				r_key=localStorage.key(i);
+				s_link=localStorage.getItem(r_key);
+				$('#linklist').append('<div id="'+r_key+'_div"><p class="link_wrapper" style="float:left;"><a id="'+r_key+'_link" class="native_link" onclick="open_link('+r_key+')">'+s_link+'</a></p><p class="glyphicon glyphicon-trash" style="float:right;" onClick="del_link('+r_key+')"></p></div>');
+			}
+		}
+		key_var=parseInt(r_key)+1;
     },
     // Update DOM on a Received Event
     receivedEvent: function(id) {
@@ -29,8 +45,10 @@ var app = {
 };
 
 //Variable Declarations
+var key_var=1;
 var rand;
 var browser;
+var curr_url="";
 var div_on_focus=0;
 var isloading=0;
 var dis=new Array(8);
@@ -84,10 +102,12 @@ function retr(){
 	
 		//Entertainment
 		if(rand==1){
-			jQuery.getJSON("content/entertainment.json",function(data){
+			jQuery.getJSON("content/debug.json",function(data){
 					rand=random_gen(1,Object.keys(data).length);
+					alert(data[rand]);
 					browser=window.open(data[rand],'_blank','location=yes');
-					browser.addEventListener('exit',reset_button);
+					browser.addEventListener('exit',reset_button(data[rand]));
+					//browser.addEventListener('loadstart',function(e){alert(e.url);});
 			});
 		}
 	
@@ -96,7 +116,7 @@ function retr(){
 			jQuery.getJSON("content/games.json",function(data){
 					rand=random_gen(1,Object.keys(data).length);
 					browser=window.open(data[rand],'_blank','location=yes');
-					browser.addEventListener('exit',reset_button);
+					browser.addEventListener('exit',reset_button(data[rand]));
 			});
 		}
 	
@@ -105,7 +125,7 @@ function retr(){
 			jQuery.getJSON("content/handpicked.json",function(data){
 					rand=random_gen(1,Object.keys(data).length);
 					browser=window.open(data[rand],'_blank','location=yes');
-					browser.addEventListener('exit',reset_button);
+					browser.addEventListener('exit',reset_button(data[rand]));
 			});
 		}
 	
@@ -114,7 +134,7 @@ function retr(){
 			jQuery.getJSON("content/humour.json",function(data){
 					rand=random_gen(1,Object.keys(data).length);
 					browser=window.open(data[rand],'_blank','location=yes');
-					browser.addEventListener('exit',reset_button);
+					browser.addEventListener('exit',reset_button(data[rand]));
 			});
 		}
 	
@@ -123,7 +143,7 @@ function retr(){
 			jQuery.getJSON("content/music.json",function(data){
 					rand=random_gen(1,Object.keys(data).length);
 					browser=window.open(data[rand],'_blank','location=yes');
-					browser.addEventListener('exit',reset_button);
+					browser.addEventListener('exit',reset_button(data[rand]));
 			});
 		}
 	
@@ -132,7 +152,7 @@ function retr(){
 			jQuery.getJSON("content/self_improv.json",function(data){
 					rand=random_gen(1,Object.keys(data).length);
 					browser=window.open(data[rand],'_blank','location=yes');
-					browser.addEventListener('exit',reset_button);
+					browser.addEventListener('exit',reset_button(data[rand]));
 			});
 		}
 	
@@ -141,7 +161,7 @@ function retr(){
 			jQuery.getJSON("content/the_new_world.json",function(data){
 					rand=random_gen(1,Object.keys(data).length);
 					browser=window.open(data[rand],'_blank','location=yes');
-					browser.addEventListener('exit',reset_button);
+					browser.addEventListener('exit',reset_button(data[rand]));
 			});
 		}
 	
@@ -150,14 +170,13 @@ function retr(){
 			jQuery.getJSON("content/the_past.json",function(data){
 					rand=random_gen(1,Object.keys(data).length);
 					browser=window.open(data[rand],'_blank','location=yes');
-					browser.addEventListener('exit',reset_button);
+					browser.addEventListener('exit',reset_button(data[rand]));
 			});
 		}
 	}
 	//If everything is deselected
 	else{
 		//Warning toast
-		alert("ONCE");
 		$('#toastbar').text("You have disabled all categories!");
 		$('#toastbar').fadeIn(500);
 		$('#toastbar').fadeOut(1000);
@@ -180,12 +199,13 @@ function leave_button(){
 	if(isloading==0 && !($("#menu").hasClass('visible'))){
 		isloading=1;
 		retr();
-		alert("YOWZAH");
 	}
 }
 
-function reset_button(){
+function reset_button(url){
 	$('.loading').hide();
+	curr_url=url;
+	$('.savelink').show();
 	isloading=0;
 }
 
@@ -231,6 +251,45 @@ function about_app(){
 
 //View saved content
 function saved_content(){
+	div_on_focus=4;
+	$('#menu').animate({"left":"-75vw"},250).removeClass('visible');
+	$('#linklist').fadeIn(500);
+}
+
+
+//Save a link
+function save_link(){
+	if($('#no_links').html()!=""){
+		$('#no_links').html("");
+		
+	}
+	$('#linklist').append('<div id="'+key_var+'_div"><p class="link_wrapper" style="float:left;"><a id="'+key_var+'_link" class="native_link" onclick="open_link('+key_var+')">'+curr_url+'</a></p><p class="glyphicon glyphicon-trash" style="float:right;" onClick="del_link('+key_var+')"></p></div>');
+	localStorage.setItem(key_var.toString(),curr_url);
+	key_var++;
+	$(".savelink").fadeOut(250);
+	$('#toastbar').text("Saved!");
+	$('#toastbar').fadeIn(500);
+	$('#toastbar').fadeOut(1000);
+	
+}
+
+//Open links from saved links directly in the browser
+function open_link(k){
+	window.open($('#'+k+'_link').text(),'_system','location=yes');
+}
+
+//Delete link on clicking trash button
+function del_link(k){
+	navigator.notification.confirm('Are you sure?',confirm_del_link,'Delete link','Okay,Cancel');
+	function confirm_del_link(b){
+		if(b==1){
+			localStorage.removeItem(k.toString());
+			$("#"+k+"_div").hide();
+			if(localStorage.length==0){
+				$('#no_links').html('No links saved');
+			}
+		}
+	}
 }
 
 //How to contribute
@@ -261,5 +320,9 @@ function back_handler(){
 	else if(div_on_focus==3){
 		div_on_focus=0;
 		$('#contribute').fadeOut(500);
+	}
+	else if(div_on_focus==4){
+		div_on_focus=0;
+		$('#linklist').fadeOut(500);
 	}
 }

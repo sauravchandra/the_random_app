@@ -32,11 +32,14 @@
       	<span class="main_message"></span><br>Press the button.
       </div>
       <div class="the_button_wrapper">
-      	<img src="img/button_unpressed.png" class="the_button" onTouchStart="press_button()" onTouchEnd="leave_button()" onMouseDown="press_button()" onMouseUp="leave_button()">
+      	<img src="img/button_unpressed.png" class="the_button" onTouchStart="press_button()" onTouchEnd="leave_button()">
         <div class="loading progress">
       		<div class="progress-bar progress-bar-striped active" role="progressbar" style="width:100%;"></div>
       	</div>
         <div class="loading loader_text"></div> 
+      </div>
+      <div class="savelink">
+    	<button class="btn btn-block btn-info" onClick="save_link()">Found the last link interesting?<br>Click here to save it.</button>
       </div>
     </div>
     <div id="menu_button" class="persist_btn" style="left:0%; bottom:90%; transform:none;">
@@ -126,8 +129,11 @@
     		You can help this app grow by contributing!<br><br>
             If the app takes you to any NSFW content or a broken/unavailable link, report it to agzstudios@gmail.com<br><br>
             Suggestions for websites that host interesting content that can be added to this app's catalogue are also welcome!<br><br>
-            If you're comfortable with git, you can make your own changes and commit them at <a onclick="window.open('https://github.com/agzuniverse/the_random_app','_blank','location=yes')">https://github.com/agzuniverse/the_random_app</a><br>
+            If you're comfortable with git, you can make your own changes and commit them at <a onclick="window.open('https://github.com/agzuniverse/the_random_app','_system','location=yes')">https://github.com/agzuniverse/the_random_app</a><br>
 	    </div>
+    </div>
+    <div id="linklist" class="link_list">
+    	<div id="no_links" style="text-align:center;"></div>
     </div>
     <div id="toastbar" class="toast w3-round-xlarge w3-border w3-border-white" ></div>
     
