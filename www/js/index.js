@@ -88,9 +88,8 @@ function retr(){
 		dis[7]=1;
 	}
 	
-	//Check if everything is not deselected
-	if(!(dis.every(function(d){return d==1}))){
-		
+	//Check if everything is not deselected and if device is online
+	if(!(dis.every(function(d){return d==1})) && navigator.connection.type!="unknown" && navigator.connection.type!="none" && navigator.connection.type!="cell"){
 		//Show loader and caption
 		rand=random_gen(0,msgs.length-1);
 		$('.loader_text').text(msgs[rand]);
@@ -104,10 +103,8 @@ function retr(){
 		if(rand==1){
 			jQuery.getJSON("content/debug.json",function(data){
 					rand=random_gen(1,Object.keys(data).length);
-					alert(data[rand]);
 					browser=window.open(data[rand],'_blank','location=yes');
 					browser.addEventListener('exit',reset_button(data[rand]));
-					//browser.addEventListener('loadstart',function(e){alert(e.url);});
 			});
 		}
 	
@@ -175,9 +172,16 @@ function retr(){
 		}
 	}
 	//If everything is deselected
-	else{
+	else if(dis.every(function(d){return d==1})){
 		//Warning toast
 		$('#toastbar').text("You have disabled all categories!");
+		$('#toastbar').fadeIn(500);
+		$('#toastbar').fadeOut(1000);
+		isloading=0;
+	}
+	//If no network connection
+	else if(navigator.connection.type=="unknown" || navigator.connection.type=="none" || navigator.connection.type=="cell"){
+		$('#toastbar').text("No internet connection!");
 		$('#toastbar').fadeIn(500);
 		$('#toastbar').fadeOut(1000);
 		isloading=0;
