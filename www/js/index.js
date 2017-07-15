@@ -64,6 +64,8 @@ var cat_end=8;
 function retr(){
 	//Check which categories are disabled
 	//dis.fill(0); <--Don't use this
+	dis=[0,0,0,0,0,0,0,0];
+	
 	if(!($("#entertainment").is(':checked'))){
 		dis[0]=1;
 	}
