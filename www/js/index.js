@@ -95,6 +95,7 @@ function retr(){
 	if(!(dis.every(function(d){return d==1})) && navigator.connection.type!="unknown" && navigator.connection.type!="none" && navigator.connection.type!="cell"){
 		//Show loader and caption
 		rand=random_gen(0,msgs.length-1);
+		$('.savelink').hide();
 		$('.loader_text').text(msgs[rand]);
 		$('.loading').show();
 		
