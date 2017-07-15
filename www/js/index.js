@@ -51,9 +51,10 @@ var browser;
 var curr_url="";
 var div_on_focus=0;
 var isloading=0;
-var dis=new Array(8);
-var msgs=['Loading...','Counting the number of stars in the universe...','Waiting for winter to arrive...','Bringing Jon Snow back to life...','Casting a patronus...','Cooking some crystal meth...','Erasing the rules of fight club...','Flinging you across the internet...','Activating warp drive...']
-var titles=['Bored?<br>No more.','Stuck on a shopping trip with your family?','One of those days that goes on for too long?','Trying to look busy?','Have nothing to do?','A rainy day and forgot to save up something?','Want to explore the internet?','Have some time to waste?']
+var dis=new Array(8); 
+dis=[0,0,0,0,0,0,0,0]; //dis.fill() apparently not supported on older devices
+var msgs=['Loading...','Counting the number of stars in the universe...','Waiting for winter to arrive...','Bringing Jon Snow back to life...','Casting a patronus...','Cooking some crystal meth...','Erasing the rules of fight club...','Flinging you across the internet...','Activating warp drive...','Hacking into Pied Piper...','Getting coffee at Central Perk...'];
+var titles=['Bored?<br>No more.','Stuck on a shopping trip with your family?','One of those days that goes on for too long?','Trying to look busy?','Have nothing to do?','A rainy day and forgot to save up something?','Want to explore the internet?','Have some time to waste?','Feeling curious?'];
 var swiper=new Hammer(document.getElementById('main'));
 
 //Number of categories
@@ -62,7 +63,7 @@ var cat_end=8;
 //Retrieve content
 function retr(){
 	//Check which categories are disabled
-	dis.fill(0);
+	//dis.fill(0); <--Don't use this
 	if(!($("#entertainment").is(':checked'))){
 		dis[0]=1;
 	}
@@ -101,7 +102,7 @@ function retr(){
 	
 		//Entertainment
 		if(rand==1){
-			jQuery.getJSON("content/debug.json",function(data){
+			jQuery.getJSON("https://agzuniverse.github.io/content_random/entertainment.json",function(data){
 					rand=random_gen(1,Object.keys(data).length);
 					browser=window.open(data[rand],'_blank','location=yes');
 					browser.addEventListener('exit',reset_button(data[rand]));
@@ -110,7 +111,7 @@ function retr(){
 	
 		//Games
 		else if(rand==2){
-			jQuery.getJSON("content/games.json",function(data){
+			jQuery.getJSON("https://agzuniverse.github.io/content_random/games.json",function(data){
 					rand=random_gen(1,Object.keys(data).length);
 					browser=window.open(data[rand],'_blank','location=yes');
 					browser.addEventListener('exit',reset_button(data[rand]));
@@ -119,7 +120,7 @@ function retr(){
 	
 		//handpicked
 		else if(rand==8){
-			jQuery.getJSON("content/handpicked.json",function(data){
+			jQuery.getJSON("https://agzuniverse.github.io/content_random/handpicked.json",function(data){
 					rand=random_gen(1,Object.keys(data).length);
 					browser=window.open(data[rand],'_blank','location=yes');
 					browser.addEventListener('exit',reset_button(data[rand]));
@@ -128,7 +129,7 @@ function retr(){
 	
 		//Humour
 		else if(rand==3){
-			jQuery.getJSON("content/humour.json",function(data){
+			jQuery.getJSON("https://agzuniverse.github.io/content_random/humour.json",function(data){
 					rand=random_gen(1,Object.keys(data).length);
 					browser=window.open(data[rand],'_blank','location=yes');
 					browser.addEventListener('exit',reset_button(data[rand]));
@@ -137,7 +138,7 @@ function retr(){
 	
 		//Music
 		else if(rand==4){
-			jQuery.getJSON("content/music.json",function(data){
+			jQuery.getJSON("https://agzuniverse.github.io/content_random/music.json",function(data){
 					rand=random_gen(1,Object.keys(data).length);
 					browser=window.open(data[rand],'_blank','location=yes');
 					browser.addEventListener('exit',reset_button(data[rand]));
@@ -146,7 +147,7 @@ function retr(){
 	
 		//Self improvement
 		else if(rand==5){
-			jQuery.getJSON("content/self_improv.json",function(data){
+			jQuery.getJSON("https://agzuniverse.github.io/content_random/self_improv.json",function(data){
 					rand=random_gen(1,Object.keys(data).length);
 					browser=window.open(data[rand],'_blank','location=yes');
 					browser.addEventListener('exit',reset_button(data[rand]));
@@ -155,7 +156,7 @@ function retr(){
 	
 		//New world
 		else if(rand==6){
-			jQuery.getJSON("content/the_new_world.json",function(data){
+			jQuery.getJSON("https://agzuniverse.github.io/content_random/the_new_world.json",function(data){
 					rand=random_gen(1,Object.keys(data).length);
 					browser=window.open(data[rand],'_blank','location=yes');
 					browser.addEventListener('exit',reset_button(data[rand]));
@@ -164,7 +165,7 @@ function retr(){
 	
 		//Past
 		else if(rand==7){
-			jQuery.getJSON("content/the_past.json",function(data){
+			jQuery.getJSON("https://agzuniverse.github.io/content_random/the_past.json",function(data){
 					rand=random_gen(1,Object.keys(data).length);
 					browser=window.open(data[rand],'_blank','location=yes');
 					browser.addEventListener('exit',reset_button(data[rand]));
