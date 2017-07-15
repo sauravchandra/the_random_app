@@ -4,15 +4,15 @@
     <description>
         An app that loads something random from the internet.
     </description>
-    <author email="agzstudios@gmail.com" href=https://agzuniverse.github.io/"">
+    <author email="agzstudios@gmail.com" href="https://agzuniverse.github.io/">
         A G Z Studios
     </author>
     <content src="index.html" />
     <preference name="DisallowOverscroll" value="true" />
     <preference name="android-minSdkVersion" value="14" />
 	<preference name="orientation" value="portrait" />
-	<!--<preference name="android-minSdkVersion" value="19"/> 
-	
+	 
+	<!--
     <plugin name="cordova-plugin-battery-status" source="npm" spec="~1.1.1" />
     <plugin name="cordova-plugin-camera" source="npm" spec="~2.1.1" />
     <plugin name="cordova-plugin-media-capture" source="npm" spec="~1.2.0" />
@@ -39,6 +39,7 @@
     <plugin name="cordova-plugin-whitelist" source="npm" spec="~1.2.1" />
 	-->
     <platform name="android">
+		<preference name="android-minSdkVersion" value="19"/>
         <icon density="ldpi" src="www/res/icon/android/drawable-ldpi-icon.png" />
         <icon density="mdpi" src="www/res/icon/android/drawable-mdpi-icon.png" />
         <icon density="hdpi" src="www/res/icon/android/drawable-hdpi-icon.png" />
