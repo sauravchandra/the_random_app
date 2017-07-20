@@ -22,6 +22,20 @@ var app = {
 		$('.main_message').html(titles[rand]);
 		setTimeout(function(){$('#splash').hide();},1000);
 		
+		 // Set AdMobAds options:
+      	admob.setOptions({
+        	publisherId:          "NONE",                                    // Replace with your AdMob id (if you don't have any, set it to "NONE")
+	        tappxIdiOS:           "/XXXXXXXXX/Pub-XXXX-iOS-IIII",            // Replace with your Tappx Id for iOS
+    	    tappxIdAndroid:       "/120940746/Pub-21038-Android-3600",        // Replace with your Tappx Id for Android
+        	tappxShare:           1                                          // Do not use lower tappxShare ratio if you have set publixherId to "NONE"
+	      });
+
+      // Start showing banners (will show atomatically as autoShowBanner is set to true by default)
+      admob.createBannerView();
+
+      // Request interstitial (will present automatically as autoShowInterstitial is set to true by default)
+      admob.requestInterstitialAd();
+	
 		//Load saved links
 		var s_link;
 		var r_key=0;
@@ -334,3 +348,13 @@ function back_handler(){
 		$('#linklist').fadeOut(500);
 	}
 }
+
+/*function initAds(){
+	tappx.setOptions({
+         publisherId:      "NONE",
+         tappxIdiOS:       "/XXXXXXXXX/Pub-XXXX-iOS-IIII",
+         tappxIdAndroid:   "/XXXXXXXXX/Pub-XXXX-Android-AAAA",
+         tappxShare:       1
+    });
+    registerAdEvents();
+}*/
