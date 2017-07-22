@@ -21,7 +21,7 @@ var app = {
 		rand=random_gen(0,titles.length-1);
 		$('.main_message').html(titles[rand]);
 		setTimeout(function(){$('#splash').hide();},1000);
-		
+	
 		//Load saved links
 		var s_link;
 		var r_key=0;
