@@ -21,7 +21,7 @@ var app = {
 		rand=random_gen(0,titles.length-1);
 		$('.main_message').html(titles[rand]);
 		setTimeout(function(){$('#splash').hide();},1000);
-		
+	
 		//Load saved links
 		var s_link;
 		var r_key=0;
@@ -102,12 +102,15 @@ function retr(){
 		do{
 			rand=random_gen(1,cat_end);
 		}while(dis[rand-1]==1)
-	
+		
+		rand=1;
 		//Entertainment
 		if(rand==1){
 			jQuery.getJSON("https://agzuniverse.github.io/content_random/entertainment.json",function(data){
 					rand=random_gen(1,Object.keys(data).length);
-					browser=window.open(data[rand],'_blank','location=yes');
+					browser=cordova.ThemeableBrowser.open(data[rand],'_blank');
+					//browser=window.open(data[rand],'_blank','location=yes');
+					//browser.addEventListener('loadstart',function(e){browser.show();});
 					browser.addEventListener('exit',reset_button(data[rand]));
 			});
 		}
@@ -184,12 +187,12 @@ function retr(){
 		isloading=0;
 	}
 	//If no network connection
-	else if(navigator.connection.type=="unknown" || navigator.connection.type=="none" || navigator.connection.type=="cell"){
+	/*else if(navigator.connection.type=="unknown" || navigator.connection.type=="none" || navigator.connection.type=="cell"){
 		$('#toastbar').text("No internet connection!");
 		$('#toastbar').fadeIn(500);
 		$('#toastbar').fadeOut(1000);
 		isloading=0;
-	}
+	}*/
 }
 
 //Randomizer

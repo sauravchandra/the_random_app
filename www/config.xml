@@ -1,5 +1,5 @@
 <?xml version='1.0' encoding='utf-8'?>
-<widget id="com.agzstudios.xapp" version="1.0.0" xmlns="http://www.w3.org/ns/widgets" xmlns:gap="http://phonegap.com/ns/1.0">
+<widget id="com.agzuniverse.xapp" version="1.0.0" xmlns="http://www.w3.org/ns/widgets" xmlns:gap="http://phonegap.com/ns/1.0">
     <name>The Random App</name>
     <description>
         An app that loads something random from the internet.
@@ -30,6 +30,7 @@
 	<plugin name="cordova-plugin-globalization" source="npm" spec="~1.0.3" />
 	-->
     <plugin name="cordova-plugin-inappbrowser" source="npm" spec="~1.3.0" />
+	<plugin name="cordova-plugin-themeablebrowser" spec="~0.2.17" />
 	<!--
 	<plugin name="cordova-plugin-media" source="npm" spec="~2.2.0" />
 	-->
