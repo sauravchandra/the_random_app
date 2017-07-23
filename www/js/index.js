@@ -108,7 +108,56 @@ function retr(){
 		if(rand==1){
 			jQuery.getJSON("https://agzuniverse.github.io/content_random/entertainment.json",function(data){
 					rand=random_gen(1,Object.keys(data).length);
-					browser=cordova.ThemeableBrowser.open(data[rand],'_blank');
+					browser=cordova.ThemeableBrowser.open(data[rand],'_blank',{	
+					toolbar: {
+						height: 44,
+						color: '#666'
+					},
+					title: {
+						color: '#CCC',
+						showPageTitle: true
+					},
+					backButton: {
+						wwwImage: 'img/left.png',
+						wwwImagePressed: 'img/left.png',
+						wwwImageDensity: 4,
+						align: 'left',
+					},
+					forwardButton: {
+						wwwImage: 'img/right.png',
+						wwwImagePressed: 'img/right.png',
+						wwwImageDensity: 4,
+						align: 'left',
+					},
+					closeButton: {
+						wwwImage: 'img/close.png',
+						wwwImagePressed: 'img/close.png',
+						wwwImageDensity: 4,
+						align: 'left',
+					},
+					menu: {
+						wwwImage: 'img/menu.png',
+						wwwImagePressed: 'img/menu.png',
+						wwwImageDensity: 4,
+						align: 'right',
+						items: [
+							{
+								event: 'clip',
+								label: 'Copy URL'
+							}
+						]
+					},
+					backButtonCanClose: true
+				}).addEventListener('clip', function(e) {
+					alert('URL Copied!');
+				});
+					
+					
+					
+					
+					
+					
+					
 					//browser=window.open(data[rand],'_blank','location=yes');
 					//browser.addEventListener('loadstart',function(e){browser.show();});
 					browser.addEventListener('exit',reset_button(data[rand]));
