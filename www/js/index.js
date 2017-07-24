@@ -48,13 +48,54 @@ var app = {
 var key_var=1;
 var rand;
 var browser;
+var browser_style={	
+					toolbar: {
+						height: 50,
+						color: '#212121'
+					},
+					title: {
+						color: '#FAFAFA',
+						showPageTitle: true
+					},
+					backButton: {
+						wwwImage: 'img/left.png',
+						wwwImagePressed: 'img/left.png',
+						wwwImageDensity: 4,
+						align: 'left',
+					},
+					forwardButton: {
+						wwwImage: 'img/right.png',
+						wwwImagePressed: 'img/right.png',
+						wwwImageDensity: 4,
+						align: 'left',
+					},
+					closeButton: {
+						wwwImage: 'img/close.png',
+						wwwImagePressed: 'img/close.png',
+						wwwImageDensity: 4,
+						align: 'right',
+					},
+					menu: {
+						wwwImage: 'img/menu.png',
+						wwwImagePressed: 'img/menu.png',
+						wwwImageDensity: 4,
+						align: 'right',
+						items: [
+							{
+								event: 'clip',
+								label: 'Copy URL'
+							}
+						]
+					},
+					backButtonCanClose: true
+				};
 var curr_url="";
 var div_on_focus=0;
 var isloading=0;
 var dis=new Array(8); 
 dis=[0,0,0,0,0,0,0,0]; //dis.fill() apparently not supported on older devices
 var msgs=['Loading...','Counting the number of stars in the universe...','Waiting for winter to arrive...','Bringing Jon Snow back to life...','Casting a patronus...','Cooking some crystal meth...','Erasing the rules of fight club...','Flinging you across the internet...','Activating warp drive...','Hacking into Pied Piper...','Getting coffee at Central Perk...'];
-var titles=['Bored?<br>No more.','Stuck on a shopping trip with your family?','One of those days that goes on for too long?','Trying to look busy?','Have nothing to do?','A rainy day and forgot to save up something?','Want to explore the internet?','Have some time to waste?','Feeling curious?'];
+var titles=['Bored?<br>No more.','Stuck on a shopping trip with your family?','One of those days that goes on for too long?','Trying to look busy?','Have nothing to do?','A rainy day and forgot to save up something?','Want to explore the internet?','Have some time to waste?','Feeling curious?','Totally jobless?'];
 var swiper=new Hammer(document.getElementById('main'));
 
 //Number of categories
@@ -108,56 +149,9 @@ function retr(){
 		if(rand==1){
 			jQuery.getJSON("https://agzuniverse.github.io/content_random/entertainment.json",function(data){
 					rand=random_gen(1,Object.keys(data).length);
-					browser=cordova.ThemeableBrowser.open(data[rand],'_blank',{	
-					toolbar: {
-						height: 44,
-						color: '#666'
-					},
-					title: {
-						color: '#CCC',
-						showPageTitle: true
-					},
-					backButton: {
-						wwwImage: 'img/left.png',
-						wwwImagePressed: 'img/left.png',
-						wwwImageDensity: 4,
-						align: 'left',
-					},
-					forwardButton: {
-						wwwImage: 'img/right.png',
-						wwwImagePressed: 'img/right.png',
-						wwwImageDensity: 4,
-						align: 'left',
-					},
-					closeButton: {
-						wwwImage: 'img/close.png',
-						wwwImagePressed: 'img/close.png',
-						wwwImageDensity: 4,
-						align: 'left',
-					},
-					menu: {
-						wwwImage: 'img/menu.png',
-						wwwImagePressed: 'img/menu.png',
-						wwwImageDensity: 4,
-						align: 'right',
-						items: [
-							{
-								event: 'clip',
-								label: 'Copy URL'
-							}
-						]
-					},
-					backButtonCanClose: true
-				}).addEventListener('clip', function(e) {
+					browser=cordova.ThemeableBrowser.open(data[rand],'_blank',browser_style).addEventListener('clip', function(e) {
 					alert('URL Copied!');
 				});
-					
-					
-					
-					
-					
-					
-					
 					//browser=window.open(data[rand],'_blank','location=yes');
 					//browser.addEventListener('loadstart',function(e){browser.show();});
 					browser.addEventListener('exit',reset_button(data[rand]));

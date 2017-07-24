@@ -45,13 +45,14 @@ body {
 	position:absolute;
 	height:100vh;
 	width:100vw;
-	background-color:#FF9;
+	background-color:#333;
 }
 
 /*icon resize*/
 
 .glyphicon-menu-hamburger {
-  font-size: 7.5vw;
+  font-size: 7vw;
+  font-smoothing:antialiased;
 }
 
 .glyphicon-trash {
@@ -102,6 +103,7 @@ body {
 	text-align:center;
 	transform: translate(-50%,0);
 	padding:7px;
+	color:#BBB;
 }
 
 /*top 45% of the screen holds the message displayed alongside the button*/
@@ -114,6 +116,8 @@ body {
 	padding:15vw 3vw 0vw 3vw;
 	text-align:center;
 	font-size:7.5vw;
+	line-height:12vw;
+	color:#F2F4F4;
 }
 
 .main_message{
@@ -149,7 +153,8 @@ body {
 .side_menu{
 	position:fixed;
 	z-index:20;
-	background-color:#FEFDE0;
+	background-color:#AAA;
+	color:#202020;
 	height:100vh;
 	width:70vw;
 	left:-75vw;
@@ -158,7 +163,7 @@ body {
 	font-weight:bold;
 	padding-top:20px;
 	padding-bottom:20px;
-	box-shadow:4px 4px 15px;
+	box-shadow:4px 4px 15px #000;
 }
 
 .aboutapp{
@@ -280,11 +285,11 @@ body {
 }
 
 input:checked + .slider {
-  background-color: #2196F3;
+  background-color:#C91818;
 }
 
 input:focus + .slider {
-  box-shadow: 0 0 1px #2196F3;
+  box-shadow: 0 0 1px #C91818;
 }
 
 input:checked + .slider:before {
