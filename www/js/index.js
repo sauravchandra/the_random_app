@@ -20,7 +20,10 @@ var app = {
 		document.addEventListener("backbutton",back_handler,false);
 		rand=random_gen(0,titles.length-1);
 		$('.main_message').html(titles[rand]);
-		setTimeout(function(){$('#splash').hide();},1000);
+		setTimeout(function(){
+			$('#splash').hide();
+			$('.persist_btn').css("color","#BBB");
+		},1000);
 	
 		//Load saved links
 		var s_link;
@@ -120,6 +123,7 @@ function retr(){
 		dis[3]=1;
 	}
 	if(!($("#self_improv").is(':checked'))){
+		//AS OF VERSION 1.5.0 SELF IMROV IS EXTERNALLY REPRESENTED AS MISCELLANEOUS
 		dis[4]=1;
 	}
 	if(!($("#the_new_world").is(':checked'))){
@@ -144,16 +148,14 @@ function retr(){
 			rand=random_gen(1,cat_end);
 		}while(dis[rand-1]==1)
 		
-		rand=1;
 		//Entertainment
 		if(rand==1){
 			jQuery.getJSON("https://agzuniverse.github.io/content_random/entertainment.json",function(data){
 					rand=random_gen(1,Object.keys(data).length);
 					browser=cordova.ThemeableBrowser.open(data[rand],'_blank',browser_style).addEventListener('clip', function(e) {
-					alert('URL Copied!');
+					cordova.plugins.clipboard.copy(data[rand]);
 				});
 					//browser=window.open(data[rand],'_blank','location=yes');
-					//browser.addEventListener('loadstart',function(e){browser.show();});
 					browser.addEventListener('exit',reset_button(data[rand]));
 			});
 		}
@@ -162,7 +164,9 @@ function retr(){
 		else if(rand==2){
 			jQuery.getJSON("https://agzuniverse.github.io/content_random/games.json",function(data){
 					rand=random_gen(1,Object.keys(data).length);
-					browser=window.open(data[rand],'_blank','location=yes');
+					browser=cordova.ThemeableBrowser.open(data[rand],'_blank',browser_style).addEventListener('clip', function(e) {
+					cordova.plugins.clipboard.copy(data[rand]);
+				});
 					browser.addEventListener('exit',reset_button(data[rand]));
 			});
 		}
@@ -171,7 +175,9 @@ function retr(){
 		else if(rand==8){
 			jQuery.getJSON("https://agzuniverse.github.io/content_random/handpicked.json",function(data){
 					rand=random_gen(1,Object.keys(data).length);
-					browser=window.open(data[rand],'_blank','location=yes');
+					browser=cordova.ThemeableBrowser.open(data[rand],'_blank',browser_style).addEventListener('clip', function(e) {
+					cordova.plugins.clipboard.copy(data[rand]);
+				});
 					browser.addEventListener('exit',reset_button(data[rand]));
 			});
 		}
@@ -180,7 +186,9 @@ function retr(){
 		else if(rand==3){
 			jQuery.getJSON("https://agzuniverse.github.io/content_random/humour.json",function(data){
 					rand=random_gen(1,Object.keys(data).length);
-					browser=window.open(data[rand],'_blank','location=yes');
+					browser=cordova.ThemeableBrowser.open(data[rand],'_blank',browser_style).addEventListener('clip', function(e) {
+					cordova.plugins.clipboard.copy(data[rand]);
+				});
 					browser.addEventListener('exit',reset_button(data[rand]));
 			});
 		}
@@ -189,16 +197,21 @@ function retr(){
 		else if(rand==4){
 			jQuery.getJSON("https://agzuniverse.github.io/content_random/music.json",function(data){
 					rand=random_gen(1,Object.keys(data).length);
-					browser=window.open(data[rand],'_blank','location=yes');
+					browser=cordova.ThemeableBrowser.open(data[rand],'_blank',browser_style).addEventListener('clip', function(e) {
+					cordova.plugins.clipboard.copy(data[rand]);
+				});
 					browser.addEventListener('exit',reset_button(data[rand]));
 			});
 		}
 	
 		//Self improvement
+		//AS OF VERSION 1.5.0 SELF IMROV IS EXTERNALLY REPRESENTED AS MISCELLANEOUS
 		else if(rand==5){
 			jQuery.getJSON("https://agzuniverse.github.io/content_random/self_improv.json",function(data){
 					rand=random_gen(1,Object.keys(data).length);
-					browser=window.open(data[rand],'_blank','location=yes');
+					browser=cordova.ThemeableBrowser.open(data[rand],'_blank',browser_style).addEventListener('clip', function(e) {
+					cordova.plugins.clipboard.copy(data[rand]);
+				});
 					browser.addEventListener('exit',reset_button(data[rand]));
 			});
 		}
@@ -207,7 +220,9 @@ function retr(){
 		else if(rand==6){
 			jQuery.getJSON("https://agzuniverse.github.io/content_random/the_new_world.json",function(data){
 					rand=random_gen(1,Object.keys(data).length);
-					browser=window.open(data[rand],'_blank','location=yes');
+					browser=cordova.ThemeableBrowser.open(data[rand],'_blank',browser_style).addEventListener('clip', function(e) {
+					cordova.plugins.clipboard.copy(data[rand]);
+				});
 					browser.addEventListener('exit',reset_button(data[rand]));
 			});
 		}
@@ -216,7 +231,9 @@ function retr(){
 		else if(rand==7){
 			jQuery.getJSON("https://agzuniverse.github.io/content_random/the_past.json",function(data){
 					rand=random_gen(1,Object.keys(data).length);
-					browser=window.open(data[rand],'_blank','location=yes');
+					browser=cordova.ThemeableBrowser.open(data[rand],'_blank',browser_style).addEventListener('clip', function(e) {
+					cordova.plugins.clipboard.copy(data[rand]);
+				});
 					browser.addEventListener('exit',reset_button(data[rand]));
 			});
 		}
@@ -230,12 +247,12 @@ function retr(){
 		isloading=0;
 	}
 	//If no network connection
-	/*else if(navigator.connection.type=="unknown" || navigator.connection.type=="none" || navigator.connection.type=="cell"){
+	else if(navigator.connection.type=="unknown" || navigator.connection.type=="none" || navigator.connection.type=="cell"){
 		$('#toastbar').text("No internet connection!");
 		$('#toastbar').fadeIn(500);
 		$('#toastbar').fadeOut(1000);
 		isloading=0;
-	}*/
+	}
 }
 
 //Randomizer
