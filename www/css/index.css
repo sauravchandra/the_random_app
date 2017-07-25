@@ -42,10 +42,11 @@ body {
 
 /*main viewport*/
 .app {
-	position:absolute;
 	height:100vh;
 	width:100vw;
 	background-color:#333;
+	display: flex;
+    flex-direction: column;
 }
 
 /*icon resize*/
@@ -58,15 +59,12 @@ body {
 }
 
 .savelink{
-	position:absolute;
-	bottom:0%;
-	left:0%;
-	text-align:center;
-	font-size:5.5vw;
-	height:13vh;
-	width:100vw;
-	z-index:15;
-	display:none;
+	text-align: center;
+    font-size: 5.5vw;
+    height: 13vh;
+    display: none;
+    width: 100vw;
+    z-index: 15;
 }
 
 .link_list{
@@ -106,16 +104,12 @@ body {
 
 /*top 45% of the screen holds the message displayed alongside the button*/
 .message{
-	position:absolute;
-	top:0%;
-	left:0%;
-	height:45vh;
-	width:100vw;
-	padding:15vw 3vw 0vw 3vw;
-	text-align:center;
-	font-size:7.5vw;
-	line-height:12vw;
-	color:#F2F4F4;
+	height: 45vh;
+    padding: 15vw 3vw 0vw 3vw;
+    text-align: center;
+    font-size: 7.5vw;
+    line-height: 12vw;
+    color: #F2F4F4;
 }
 
 .main_message{
@@ -124,13 +118,8 @@ body {
 
 /*the next 45% holds the button itself*/
 .the_button_wrapper{
-	position:absolute;
-	left:50%;
-	top:45vh;
-	height:45vh;
-	width:80vw;
+	
 	text-align:center;
-	transform:translate(-50%,0%);
 	font-size:10vw;
 }
 
